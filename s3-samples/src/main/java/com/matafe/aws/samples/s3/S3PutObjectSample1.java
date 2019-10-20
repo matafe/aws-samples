@@ -8,7 +8,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
-public class S3Sample1 {
+public class S3PutObjectSample1 {
 
 	private static final String BUCKET_NAME = "matafe-bucket-sample";
 
@@ -28,11 +28,11 @@ public class S3Sample1 {
 
 		InputStream is = null;
 		try {
-			is = S3Sample1.class.getResourceAsStream("/sample1.txt");
-			System.out.println(String.format("Put file: %s", new Object[] { args }));
+			is = S3PutObjectSample1.class.getResourceAsStream("/sample1.txt");
+			System.out.println(String.format("Put file: %s on %s s3 bucket", new Object[] { fileName, BUCKET_NAME }));
 			ObjectMetadata md = new ObjectMetadata();
 			md.setContentType("text/plain");
-			s3Client.putObject(new PutObjectRequest(BUCKET_NAME, fileName, is, md ));
+			s3Client.putObject(new PutObjectRequest(BUCKET_NAME, fileName, is, md));
 		} finally {
 			if (is != null) {
 				is.close();
